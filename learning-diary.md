@@ -27,3 +27,7 @@ Arguments between activities can be passed via the route string, and retrieved v
 For launching the Google webpage, I found that `LocalUriHandler` simplifies the process quite a lot: a simple `uriHandler.openUri()` opens the browser without a need to check for activity success etc.. I also found a `rememberLauncherForActivityResult` function which could be used to create an activity launcher, which could be defined with a callback that handles the result from the activity, but in the case of opening a browser the results were not important.
 
 ## Exercise 3
+
+Creating the list was very easy in Compose, and this was advertised as one of the big improvements over the old way in the Compose docs. Instead of using an Adapter as in the video, I used `LazyColumn` to create the list items. `LazyColumn` functions much like the `Column` layout composable, but renders items only when they are on the screen, allowing optimized rendering of large lists in a straightforward mannter. Each list item was simply a `Row` with a `Modifier.clickable()` applied, which allowed specifying a click handler that then navigated to another view using the `NavController` (as in the previous exercise).
+
+I tried to scale the images down with the `Image` composable's builtin `contentScale`, but that resulted in out of memory errors as the full image was loaded before the scaling was applied. I ended up adapting the `BitmapFactory` code from the tutorial, using a different approach I found on StackOverflow to get the screen width for scaling.
